@@ -24,6 +24,16 @@ function shuffle(array) {
 
     return array;
 }
+// Get all cards from http://www.nickang.com/add-event-listener-for-loop-problem-in-javascript/
+const allCardsOnPage = document.querySelectorAll('.card');
+
+allCardsOnPage.forEach(function(card, index) {
+	card.addEventListener('click',function(testclick) {
+		console.log (testclick);
+	});
+});
+
+
 
 
 /*
