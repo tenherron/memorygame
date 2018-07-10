@@ -30,9 +30,10 @@ function shuffle(array) {
 */   
 const cardList = document.querySelectorAll('.deck li');
 
-cardList.forEach(function(card, index) {
-    card.addEventListener('click', function(testclick) {
-        console.log (testclick);
+Array.from(cardList).forEach(function(card, index) {
+    card.addEventListener('click', function(event) {
+        //flip the card after click
+        card.classList.add('open', 'show');
     });
 });
 
