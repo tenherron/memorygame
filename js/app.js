@@ -27,13 +27,21 @@ function shuffle(array) {
 /* Get all cards 
 *   - from http://www.nickang.com/add-event-listener-for-loop-problem-in-javascript/
 *   - reference https://developer.mozilla.org/en-US/docs/Web/API/EventListener
+*   - reference https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length
 */   
 const cardList = document.querySelectorAll('.deck li');
+const cardArray = Array.from(cardList);
 
-Array.from(cardList).forEach(function(card, index) {
+cardArray.forEach(function(card) {
     card.addEventListener('click', function(event) {
-        //flip the card after click
-        card.classList.add('open', 'show');
+        if (cardArray.length > 2) {
+            cardArray.length = 2;
+            //flip the card after click
+            card.classList.add('open', 'show'); 
+        } else {
+            //don't flip the card after click
+            card.classList.remove('open', 'show');
+        }
     });
 });
 
