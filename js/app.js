@@ -25,24 +25,33 @@ function shuffle(array) {
     return array;
 }
 /* Get all cards 
-*   - from http://www.nickang.com/add-event-listener-for-loop-problem-in-javascript/
+*   - reference http://www.nickang.com/add-event-listener-for-loop-problem-in-javascript/
 *   - reference https://developer.mozilla.org/en-US/docs/Web/API/EventListener
 *   - reference https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length
+*   - reference https://www.youtube.com/watch?v=_rUH-sEs68Y
 */   
 const cardList = document.querySelectorAll('.deck li');
-const cardArray = Array.from(cardList);
+let cardArray = [];
 
-cardArray.forEach(function(card) {
+cardList.forEach(function(card) {
     card.addEventListener('click', function(event) {
-        if (cardArray.length > 2) {
-            cardArray.length = 2;
-            //flip the card after click
-            card.classList.add('open', 'show'); 
-        } else {
-            //don't flip the card after click
-            card.classList.remove('open', 'show');
-        }
-    });
+        
+        //console.log("card", cardArray.length);
+        //flip the card i/o
+        cardArray.push(card);
+        card.classList.add('open', 'show');
+//only show two cards at a time
+        if (cardArray.length == 2) {
+        //flip the card i/o in 1 second
+            setTimeout(function() {
+                cardArray.forEach(function(card) {  
+                    card.classList.remove('open','show');
+                }); 
+                cardArray = []; //empty the array
+            }, 1000);       
+        }  
+    });  
+
 });
 
 
