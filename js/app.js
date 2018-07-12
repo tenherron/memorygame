@@ -35,24 +35,29 @@ let cardArray = [];
 
 cardList.forEach(function(card) {
     card.addEventListener('click', function(event) {
-        
-        //console.log("card", cardArray.length);
+        //testing
+        console.log("card", cardArray.length);
         //flip the card i/o
-        cardArray.push(card);
-        card.classList.add('open', 'show');
-//only show two cards at a time
-        if (cardArray.length == 2) {
-        //flip the card i/o in 1 second
-            setTimeout(function() {
-                cardArray.forEach(function(card) {  
-                    card.classList.remove('open','show');
-                }); 
-                cardArray = []; //empty the array
-            }, 1000);       
-        }  
-    });  
+        if (!card.classList.contains('open') && !card.classList.contains('show')) {
+            cardArray.push(card);
+            card.classList.add('open', 'show');
+        
+            //only show two cards at a time
+            if (cardArray.length == 2) {
+            //flip the card i/o in 1 second
+                setTimeout(function() {
+                    cardArray.forEach(function(card) {  
+                        card.classList.remove('open','show');
+                    }); 
+                    cardArray = []; //empty the array
+                }, 1000);       
+            }//end card array.length
 
-});
+        }//end if       
+
+    });//end listener  
+    
+});//end get cardList loop
 
 
 
