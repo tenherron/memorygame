@@ -16,17 +16,17 @@ const cards = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor',
 
  //Display cards dynamically
 function allCards(makeCard) {
-    return `<li class="card"><i class="fa ${cards}"></i></li>`;
+    return `<li class="card"><i class="fa ${makeCard}"></i></li>`;
 }
 
 function makeDeck() {
-    //const cardList = document.querySelectorAll('.deck');
+    const cardList = document.querySelector('.deck');
     let cardTemplate = cards.map(function(cards) {
         return allCards(cards);
     });
-    //let deck = allCards.map((cards)=>allCards(makeCard))
-    console.log(cardTemplate);
+    cardList.innerHTML = cardTemplate.join('');
 }
+makeDeck();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
