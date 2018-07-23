@@ -18,7 +18,7 @@ const cards = [
 'fa-bicycle', 
 'fa-bomb',
 'fa-bomb'];
-
+ 
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -27,12 +27,12 @@ const cards = [
  *   - reference https://www.bbntimes.com/en/technology/the-power-of-javascript-template-literals
  *   - reference https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
  */
-
-//Display cards dynamically using a list
+ 
+// Display cards dynamically in a <li>
 function allCards(makeCard) {
     return `<li class="card"><i class="fa ${makeCard}"></i></li>`;
 }
-//Create a  group of cards
+// Create a group of cards
 function makeDeck() {
     shuffle(cards);
     const cardList = document.querySelector('.deck');
@@ -42,11 +42,11 @@ function makeDeck() {
     cardList.innerHTML = cardTemplate.join('');
 }
 makeDeck();
-
+ 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
-
+ 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
@@ -54,7 +54,7 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
+ 
     return array;
 }
 /* Get all cards 
@@ -73,26 +73,51 @@ function shuffle(array) {
  */ 
 const cardList = document.querySelectorAll('.deck li');
 let cardArray = [];
-//let match = cardArray.filter(function(value, index, array) {return array.indexOf(value) == value;}); not working because it is empty??
-//let match = cards.filter(function(value, index, array) {return array.indexOf(value) == index;}); --works
-//let match = cards.filter(function(value, index, array) {return array.indexOf(value) == index;});
-
+ 
 cardList.forEach(function(card) {
     card.addEventListener('click', function(event) {
         if (!card.classList.contains('open') && !card.classList.contains('show')) {
             cardArray.push(card);
             card.classList.add('open', 'show');
-           
+            
             //only show two cards at a time and compare the string array output
-            if (cardArray.length == 2) {
-            const presentChoice = cardArray[0]; //user 1 of 2 matches -working
-            const pastChoice = cardArray[1]; //user 2 of 2 matches -working
-
-            //see if cards match by calling checkMatch()
+            checkMatches();
+  
+        };//end if       
+ 
+    });//end listener  
+     
+});//end get cardList loop
+/*
+*    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+I need a loop for this.
+*    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+*/
+function counter(){
+    let count = document.querySelectorAll('.match');
+    if (count.childElementCount > 0 ) {
+        //increment class = moves
+        console.log('count');
+    }
+    //increment and display counter after moves NOT MATCHES are detected.
+    //how many moves?
+    //pass in return CardArry from gettng a match.???
+    //this should be a loop??
+}
+//counter();
+ 
+function checkMatches() {
+    if (cardArray.length == 2) {
+            const presentChoice = cardArray[0]; //user 1 of 2 matches
+            const pastChoice = cardArray[1]; //user 2 of 2 matches
+ 
+            //see if cards match
             if (presentChoice.innerHTML === pastChoice.innerHTML) {
             //if match add match class   
             presentChoice.classList.add('match');
             pastChoice.classList.add('match');
+
+            return cardList; //I don't know if this is correct, I am trying to return current match results.
             } 
             //flip the card i/o in 1 second
                 setTimeout(function() {
@@ -101,28 +126,29 @@ cardList.forEach(function(card) {
                     }); 
                     cardArray = []; //empty the array
                 }, 1000); 
-            }//end else
+            }//end if cardArray.length match    
+    //check each match
+    //check all matches
+
+    //return value and pass to the GameOver function
+    //pass incremental counter
+}
  
-        };//end if       
+function GameOver() {
+//works but only when the page first loads, change line 130 to all children of the deck.
+    const card = document.querySelectorAll('.deck li');
+    const GameOver = card.innerHTML='match';
+    alert('game over try again?');
+}
+// GameOver();
+ 
+//SAMPLE FUNCTION CALL:https://www.tjvantoll.com/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values/
+/*if (fruit == 'banana' || fruit == 'lemon') {
+    handleYellowFruit();
+}*/
+//1. read this https://ryanpcmcquen.org/javascript/2015/10/25/map-vs-foreach-vs-for.html
+//2. Reset button?? https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_indexof_array
 
-    });//end listener  
-    
-});//end get cardList loop
-/*
-*    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
-*    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
-*/ 
-function checkMatch() {
-    if (presentChoice.innerHTML === pastChoice.innerHTML) {
-    //if match add match class   
-    presentChoice.classList.add('match');
-    pastChoice.classList.add('match');
-
-    matchedCards.push(presentCard, pastCard);
-
-    } else {  
-        presentChoice.classList.remove('open','show');
-        pastChoice.classList.remove('open','show');
-    }
-}//end checkMatchFunction
-//checkMatch();
+//let match = cardArray.filter(function(value, index, array) {return array.indexOf(value) == value;}); not working because it is empty??
+//let match = cards.filter(function(value, index, array) {return array.indexOf(value) == index;}); --works
+//let match = cards.filter(function(value, index, array) {return array.indexOf(value) == index;});
