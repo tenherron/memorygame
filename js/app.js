@@ -81,8 +81,7 @@ cardList.forEach(function(card) {
             card.classList.add('open', 'show');
             
             //only show two cards at a time and compare the string array output
-            checkMatches();
-  
+            checkMatches();  
         };//end if       
  
     });//end listener  
@@ -92,20 +91,7 @@ cardList.forEach(function(card) {
 *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
 I need a loop for this.
 *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
-*/
-function counter(){
-    let count = document.querySelectorAll('.match');
-    if (count.childElementCount > 0 ) {
-        //increment class = moves
-        console.log('count');
-    }
-    //increment and display counter after moves NOT MATCHES are detected.
-    //how many moves?
-    //pass in return CardArry from gettng a match.???
-    //this should be a loop??
-}
-//counter();
- 
+*/ 
 function checkMatches() {
     if (cardArray.length == 2) {
             const presentChoice = cardArray[0]; //user 1 of 2 matches
@@ -116,8 +102,6 @@ function checkMatches() {
             //if match add match class   
             presentChoice.classList.add('match');
             pastChoice.classList.add('match');
-
-            return cardList; //I don't know if this is correct, I am trying to return current match results.
             } 
             //flip the card i/o in 1 second
                 setTimeout(function() {
@@ -127,20 +111,60 @@ function checkMatches() {
                     cardArray = []; //empty the array
                 }, 1000); 
             }//end if cardArray.length match    
-    //check each match
-    //check all matches
+    //track moves
+trackMoves();//something wrong with this function
+} //end checkMatches
 
-    //return value and pass to the GameOver function
-    //pass incremental counter
+// Add to counter
+/* reference:https://stackoverflow.com/questions/41683145/image-click-counter-event-listener-issues
+/* reference: SEE EXAMPLE 20 -https://stackoverflow.com/questions/1687296/what-is-dom-event-delegation!
+/* reference: Event listener with anonymous function.
+/* reference: Parent function example works- https://www.kirupa.com/html5/handling_events_for_many_elements.htm
+*/
+const movesDiv = document.querySelector('.moves');//span class where the # count lives
+movesDiv.innerHTML = 1;
+
+const trackMoves = function(movesDiv) {
+    let count = 0;
+    return function () {
+        const counterElement = movesDiv;
+        if (counterElement) {
+            counterElement.innerHTML = ++count;
+        }
+    } 
+};
+//let list = document.querySelector('.li card');
+//const list = document.getelement('.deck ul');
+//list[0].addEventListener('click', function(){trackMoves(movesDiv);}, false);
+//alert(document.getElementsByClassName("deck")[0].tagName);
+var list = document.getElementsByClassName("deck")[0].childNodes;
+for (var i = 0; i < list.length; i++){
+    list[i].onclick = function(){
+  var number = document.getElementsByClassName("number")[0].innerHTML;
+  number++;
+  document.getElementsByClassName("number")[0].innerHTML = number;};
 }
  
-function GameOver() {
-//works but only when the page first loads, change line 130 to all children of the deck.
-    const card = document.querySelectorAll('.deck li');
-    const GameOver = card.innerHTML='match';
-    alert('game over try again?');
-}
+// function GameOver() {
+// //works but only when the page first loads, change line 130 to all children of the deck.
+//     const card = document.querySelectorAll('.deck li');
+//     const GameOver = card.innerHTML='match';
+//     alert('game over try again?');
+// }
 // GameOver();
+
+// function counter(){
+//     let count = document.querySelectorAll('.match');
+//     if (count.childElementCount > 0 ) {
+//         //increment class = moves
+//         console.log('count');
+// }
+    //increment and display counter after moves NOT MATCHES are detected.
+    //how many moves?
+    //pass in return CardArry from gettng a match.???
+    //this should be a loop??
+}
+//counter();
  
 //SAMPLE FUNCTION CALL:https://www.tjvantoll.com/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values/
 /*if (fruit == 'banana' || fruit == 'lemon') {
