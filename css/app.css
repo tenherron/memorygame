@@ -107,6 +107,3 @@ h1 {
     float: right;
     cursor: pointer;
 }
-.moves[data-count="0"] {
-    color: #333;
-}
