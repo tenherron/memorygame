@@ -121,6 +121,7 @@ function checkMatches() {
 /* reference: SEE EXAMPLE 20 -https://stackoverflow.com/questions/1687296/what-is-dom-event-delegation!
 /* reference: Event listener with anonymous function.
 /* reference: Parent function example works- https://www.kirupa.com/html5/handling_events_for_many_elements.htm
+/* reference: Switch literals https://toddmotto.com/deprecating-the-switch-statement-for-object-literals/
 */
 let list = document.getElementsByClassName('deck')[0].childNodes;
 
@@ -129,9 +130,36 @@ const trackMoves = function() {
         list[i].onclick = function() {
             let number = document.getElementsByClassName('number')[0].innerHTML;
             number++;
-            document.getElementsByClassName('number')[0].innerHTML = number;};
-    }
+            document.getElementsByClassName('number')[0].innerHTML = number;
+            //getMatches()
+            getMatches ();
+            //showProgress
+            //showProgress() adds stars;
+            if (document.getElementsByClassName('match').length == 2) {
+                makeStar();
+            } else if (document.getElementsByClassName('match').length == 4) {
+                makeStar();
+            } else if (document.getElementsByClassName('match').lengths == 6) {
+                makeStar();
+            } else if (document.getElementsByClassName('match').length == 8) { 
+                makeStar();
+            } else {
+            // "default"
+            }//end makeStar
+        }; //end.onclick
+    } //end for loop 
 }; //end Add to counter call trackMoves()
+
+
+function makeStar() {
+    document.querySelector('.stars').innerHTML = '<li><i class="fa fa-star"></i></li>';
+}
+// makeStar(); working but not in the below function
+
+function getMatches () {
+let matches = document.getElementsByClassName('match').length; 
+return matches;
+}
  
 // function GameOver() {
 // //works but only when the page first loads, change line 130 to all children of the deck.
@@ -141,23 +169,7 @@ const trackMoves = function() {
 // }
 // GameOver();
 
-// function counter(){
-//     let count = document.querySelectorAll('.match');
-//     if (count.childElementCount > 0 ) {
-//         //increment class = moves
-//         console.log('count');
-// }
-    //increment and display counter after moves NOT MATCHES are detected.
-    //how many moves?
-    //pass in return CardArry from gettng a match.???
-    //this should be a loop??
-//}
-//counter();
- 
-//SAMPLE FUNCTION CALL:https://www.tjvantoll.com/2013/03/14/better-ways-of-comparing-a-javascript-string-to-multiple-values/
-/*if (fruit == 'banana' || fruit == 'lemon') {
-    handleYellowFruit();
-}*/
+
 //1. read this https://ryanpcmcquen.org/javascript/2015/10/25/map-vs-foreach-vs-for.html
 //2. Reset button?? https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_indexof_array
 
