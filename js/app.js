@@ -124,6 +124,7 @@ function checkMatches() {
 /* reference: Switch literals https://toddmotto.com/deprecating-the-switch-statement-for-object-literals/
 */
 let list = document.getElementsByClassName('deck')[0].childNodes;
+const str = '<li><i class="fa fa-star"></i></li>';
 
 const trackMoves = function() {
     for (let i = 0; i < list.length; i++){
@@ -131,34 +132,26 @@ const trackMoves = function() {
             let number = document.getElementsByClassName('number')[0].innerHTML;
             number++;
             document.getElementsByClassName('number')[0].innerHTML = number;
-            //getMatches()
-            getMatches ();
             //showProgress
-            //showProgress() adds stars;
-            if (document.getElementsByClassName('match').length == 2) {
-                makeStar();
-            } else if (document.getElementsByClassName('match').length == 4) {
-                makeStar();
-            } else if (document.getElementsByClassName('match').lengths == 6) {
-                makeStar();
-            } else if (document.getElementsByClassName('match').length == 8) { 
-                makeStar();
-            } else {
-            // "default"
-            }//end makeStar
+            showProgress();
         }; //end.onclick
     } //end for loop 
-}; //end Add to counter call trackMoves()
+    //ADD IF STATEMENT IF NUMBER == BLAHBLAH CALL GAME OVER
+}; //end trackMoves()
 
-
-function makeStar() {
-    document.querySelector('.stars').innerHTML = '<li><i class="fa fa-star"></i></li>';
-}
-// makeStar(); working but not in the below function
-
-function getMatches () {
-let matches = document.getElementsByClassName('match').length; 
-return matches;
+//showProgress - add stars based on # of matches
+function showProgress() {
+    if (document.getElementsByClassName('match').length == 4) {
+        document.querySelector('.stars').innerHTML = str.repeat(1);
+    } else if (document.getElementsByClassName('match').length == 8) {
+        document.querySelector('.stars').innerHTML = str.repeat(2);
+    } else if (document.getElementsByClassName('match').length == 12) {
+        document.querySelector('.stars').innerHTML = str.repeat(3);
+    } else if (document.getElementsByClassName('match').length == 16) { 
+        document.querySelector('.stars').innerHTML = str.repeat(4);
+    } else {
+    // "default"
+    }//end makeStar
 }
  
 // function GameOver() {
@@ -168,11 +161,3 @@ return matches;
 //     alert('game over try again?');
 // }
 // GameOver();
-
-
-//1. read this https://ryanpcmcquen.org/javascript/2015/10/25/map-vs-foreach-vs-for.html
-//2. Reset button?? https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_indexof_array
-
-//let match = cardArray.filter(function(value, index, array) {return array.indexOf(value) == value;}); not working because it is empty??
-//let match = cards.filter(function(value, index, array) {return array.indexOf(value) == index;}); --works
-//let match = cards.filter(function(value, index, array) {return array.indexOf(value) == index;});
