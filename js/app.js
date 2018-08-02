@@ -74,19 +74,24 @@ function shuffle(array) {
 const cardList = document.querySelectorAll('.deck li');
 let cardArray = [];
  
-cardList.forEach(function(card) {
+addCards();
+
+function addCards() {
+    cardList.forEach(function(card) {
     card.addEventListener('click', function(event) {
         if (!card.classList.contains('open') && !card.classList.contains('show')) {
             cardArray.push(card);
             card.classList.add('open', 'show');
             
             //only show two cards at a time and compare the string array output
-            checkMatches();  
+            checkMatches();
         };//end if       
  
     });//end listener  
      
 });//end get cardList loop
+}//end addCards function
+
 /*
 *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
 I need a loop for this.
@@ -154,6 +159,27 @@ function showProgress() {
     }//end makeStar
 }
  
+// restart() the game
+//Calling anonymous function
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call
+//you need to call an annonymous function: http://esbueno.noahstokes.com/post/77292606977/self-executing-anonymous-functions-or-how-to-write
+//https://stackoverflow.com/questions/13412675/how-can-i-call-an-anonymous-function-from-inside-itself-in-javascript
+//https://stackoverflow.com/questions/13013621/javascript-self-calling-anonymous-function-for-scope-closure
+//https://stackoverflow.com/questions/8583548/calling-a-javascript-anonymous-function-right-when-its-declared-doesnt-work
+//YOUR EXACT PROBLEM CARD RETURNS A LIST OF ELEMENTS:https://stackoverflow.com/questions/48142642/beginner-getting-addeventlistener-is-not-a-function-no-jquery
+function restart() {
+    const cards = document.getElementsByClassName('card');
+    document.getElementsByClassName('number')[0].innerHTML= 0; //reset counter
+    document.querySelector('.stars').innerHTML = '';//reset star progress
+    document.querySelector('.deck').innerHTML = '';//remove cards
+    makeDeck();
+    for(var i=0; i < cards.length; i++) {
+        cards[i].onclick = function(event)
+        {
+            addCards(cards);
+        }
+    }     
+}  
 // function GameOver() {
 // //works but only when the page first loads, change line 130 to all children of the deck.
 //     const card = document.querySelectorAll('.deck li');
