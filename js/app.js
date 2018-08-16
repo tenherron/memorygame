@@ -22,8 +22,8 @@ const cardContainer = document.querySelector('.deck');
 
 // Global variable to hold cards
 let cardArray = [];
-/* 
- * MAKE DECK
+
+/* MAKE DECK
  */
  
 // Display cards dynamically in a <li> adding the card's HTML to the page
@@ -58,55 +58,19 @@ function shuffle(array) {
 /* GET ALL CARDS 
 */
 
-// cards.addEventListener('click', function() {
-//     console.log('Success!');});
-//document.getElementsByTagName returns a NodeList of DOM elements. 
-//Each element has an addEventListener function, but the array doesn't have one.
-
-// cards.forEach(card => card.addEventListener('click', function(event) {
-//         displayCard(); 
-//         })); //end event listener
-
-
-// //Loop over it:
-
-// function displayCard2 (){
-//     var cards = document.getElementsByTagName('card');
-//     for (var i=0;i<aTags.length;i++){
-//         addEvent(aTags[i], 'click', alertWinner);
-//     }
-// }
-
 // Display cards by setting up an event listener and then checkMatches when cards are flipped.
-///--- I don't think I need this anymore const cardList = document.querySelectorAll('.deck li'); 
-
 cardContainer.addEventListener('click', function (event) {
-    const clickTarget = event.target;
-    if (!clickTarget.classList.contains('open') && !clickTarget.classList.contains('show')) {
-       displayCard(clickTarget); //displayCard() called
+    const card = event.target;
+    if (!card.classList.contains('open') && !card.classList.contains('show')) {
+       displayCard(card); //displayCard() called
     }
 })
 
-function displayCard(clickTarget) {
- //console.log('i am a card!');
-    cardArray.push(clickTarget);
-    clickTarget.classList.add('open', 'show');
+function displayCard(card) {
+    cardArray.push(card);
+    card.classList.add('open', 'show');
     checkMatches(); //compare cards
 } 
-
-// function displayCard() {
-//     cardList.forEach(function(card) {
-//         card.addEventListener('click', function(event) {
-//             if (!card.classList.contains('open') && !card.classList.contains('show')) {
-//             cardArray.push(card);
-//             card.classList.add('open', 'show');
-//             checkMatches(); //compare cards
-//             } 
-//         }); //end event listener
-//     });//end loop over cardlist
-
-// } //end displayCard()
-// displayCard();
 
 // Check Matches 2 at a time and increment the counter to display a final score later.
 function checkMatches() {
@@ -119,6 +83,8 @@ function checkMatches() {
             //if match add match class   
             presentChoice.classList.add('match');
             pastChoice.classList.add('match');
+
+            cardArray = []; //empty the array - I ADDED THIS BASED ON MATS TUTORIAL ON 8/16, also if I add an else I think I can change the color of non-matches.
             } 
             //flip the card i/o in 1 second
                 setTimeout(function() {
@@ -127,7 +93,7 @@ function checkMatches() {
                     }); 
                     cardArray = []; //empty the array
                 }, 400); 
-            }//end if cardArray.length match    
+            }//end if cardArray.length match   
     //track moves
     trackMoves();
 } //end checkMatches
@@ -151,7 +117,7 @@ const trackMoves = function() {
     }
 }; //end trackMoves()
 
-//showProgress - add stars based on # of matches
+// showProgress - add stars based on # of matches
 function showProgress() {
     if (document.getElementsByClassName('match').length == 4) {
         document.querySelector('.stars').innerHTML = str.repeat(1);
@@ -165,26 +131,32 @@ function showProgress() {
     } else {
     // "default"
     }//end makeStar
-}
+}//end showProgress()
  
-//restart() the game
+// restart() the game
 function restart() {
     document.getElementsByClassName('number')[0].innerHTML= 0; //reset counter
     document.querySelector('.stars').innerHTML = '';//reset star progress
     cardContainer.innerHTML = '';//remove cards
     makeDeck();//add cards
-
-///PROBLEM EVENT HANDLER IS ERASED SO I AM UNABLE TO RUN DISPLAY CARD I THINK DUE TO SCOPING.
+    resetCards();//resets click event
 }
 
-//gameOver - 2 parameters - Try Again or Winner
+// Reset the cards in the deck - otherwise you loose the card click event.
+function resetCards() {
+    const cardList = document.querySelectorAll('.deck li');
+    for (let card of cards) {
+        card.className = 'card';
+    }
+}
 
+// GameOver - 2 parameters - tryAgain() or youWin().
 function gameOver(){
     getModal();
 }
 
-//Try Again
-function getModal() {
+// Try Again
+function tryAgain() {
     const modal = document.querySelector('#modal1');
     if (modal.classList.contains('showModal')) {
         modal.classList.remove('showModal');
@@ -192,7 +164,8 @@ function getModal() {
         modal.classList.add('showModal');
     }
 }
-//Winner
+
+// Winner
 function youWin(){
     const modal = document.querySelector('#modal2');
     if (modal.classList.contains('showModal')) {
@@ -201,70 +174,6 @@ function youWin(){
         modal.classList.add('showModal');
     }
 }
-
-    ///get rid of lines 48 through 160 then tyr code again from RS website and then assign a variable to the displayCard function. and call the variable from the event handleer.
-
-    // const cards = document.querySelectorAll('li.card');//get card node list
-    // Array.from(cards)
-    // .forEach(addEvent)
-    // function addEvent(cards) {
-    //     cards.addEventListener('click', displayCard, false)
-
-    //     if (!card.classList.contains('open') && !card.classList.contains('show')) {
-    //     cardArray.push(card);
-    //     card.classList.add('open', 'show');
-    //     checkMatches(); //compare cards
-    //     } 
-
-    //     } //end event reassignment
-
-
-    //cardArray = [];----------->placeholder I don't think this is needed.
-
-    //Issue with event handler after calling displayCard() below. 
-    //The event listener are loss when the HTML table is rebulit.
-    //https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-    //***eventListener.handleEvent(event);
-    //does not work - card.onclick = displayCard;
-//}//end restart ();
-
-    // 
-
-// cardList.forEach(function(card) {
-//         if (!card.classList.contains('open') && !card.classList.contains('show')) {
-//             cardArray.push(card);
-//             if(cardArray.length == 2){
-//              card.classList.add('open', 'show');
-//             const presentChoice = cardArray[0]; //user 1 of 2 matches
-//             const pastChoice = cardArray[1]; //user 2 of 2 matches 
-//             }
-                      
-//             //only show two cards at a time and compare the string array output
-//             checkMatches();
-
-//         };//end if       
-     
-// });//end get cardList loop 
-    
-    // const cards = document.querySelectorAll('li.card');//get card node list
-    // Array.from(cards)
-    // .forEach(addEvent)
-    // function addEvent(cards) {
-    //     cards.addEventListener('click', callback)
-    //         callback(addIcons);
-    //      //callback
-    //     }
-    // }; 
-   
-    // function addEventListenerByClass(className, event, fn) {
-        
-    //     for(var i=0; i < cards.length; i++) {
-    //     cards[i].addEventListener(event, fn, true);
-    //     }//add event listener back to cards
-    // }
-    // addEventListenerByClass('card', 'click', addIcons);
- 
-
 /* REFERENCES:
  * MAKE DECK
  *   - reference https://www.bbntimes.com/en/technology/the-power-of-javascript-template-literals
