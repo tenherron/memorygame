@@ -32,6 +32,42 @@
 
         <ul class="deck">
         </ul>
+                <!-- Modal 1-->
+        <div class="modal fade" id="modal1">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                 <button type="button" class="close" onclick="getModal()">&times;</button>
+                 <h2 class="modal-title">GAME OVER</h2>
+                </div>
+                <div class="modal-body">
+                  <p>So sorry! There are only 32 moves available.<p>
+                  <p>I hope you try again.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" onclick="restart()">PLAY AGAIN</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- Modal 2-->
+        <div class="modal fade" id="modal2">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                 <button type="button" class="close" onclick="youWin()">&times;</button>
+                 <h2 class="modal-title">CONGRATULATIONS</h2>
+                </div>
+                <div class="modal-body">
+                  <p>I am doing a happy dance, the running man, and the prep...<p>
+                  <p>cause you <strong>WIN<strong>!</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" onclick="restart()">PLAY AGAIN</button>
+                </div>
+              </div>
+            </div>
+        </div>
     </div>
 
     <script src="js/app.js"></script>
