@@ -1,4 +1,6 @@
-//Create a list that holds all of your cards
+/* CREATE A LIST -  that holds all of your cards
+ */
+ 
 const cards = [
 'fa-diamond',
 'fa-diamond', 
@@ -55,6 +57,7 @@ function shuffle(array) {
  
     return array;
 }
+
 /* GET ALL CARDS 
 */
 
@@ -84,7 +87,7 @@ function checkMatches() {
             presentChoice.classList.add('match');
             pastChoice.classList.add('match');
 
-            cardArray = []; //empty the array - I ADDED THIS BASED ON MATS TUTORIAL ON 8/16, also if I add an else I think I can change the color of non-matches.
+            cardArray = []; //empty the array - I ADDED THIS ON 8/16
             } 
             //flip the card i/o in 1 second
                 setTimeout(function() {
@@ -133,6 +136,9 @@ function showProgress() {
     }//end makeStar
 }//end showProgress()
  
+/* ENDING THE GAME 
+*/
+
 // restart() the game
 function restart() {
     document.getElementsByClassName('number')[0].innerHTML= 0; //reset counter
@@ -150,9 +156,11 @@ function resetCards() {
     }
 }
 
-// GameOver - 2 parameters - tryAgain() or youWin().
-function gameOver(){
-    getModal();
+// GameOver - 2 options - tryAgain() or youWin().
+function gameOver() {
+    tryAgain();
+    finalScore();
+    restart();
 }
 
 // Try Again
@@ -166,7 +174,7 @@ function tryAgain() {
 }
 
 // Winner
-function youWin(){
+function youWin() {
     const modal = document.querySelector('#modal2');
     if (modal.classList.contains('showModal')) {
         modal.classList.remove('showModal');
@@ -174,37 +182,18 @@ function youWin(){
         modal.classList.add('showModal');
     }
 }
-/* REFERENCES:
- * MAKE DECK
- *   - reference https://www.bbntimes.com/en/technology/the-power-of-javascript-template-literals
- *   - reference https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
- 
- *   GET ALL MOVES
- *   - reference http://www.nickang.com/add-event-listener-for-loop-problem-in-javascript/
- *   - reference https://developer.mozilla.org/en-US/docs/Web/API/EventListener
- *   - reference https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length
- *   - reference https://www.youtube.com/watch?v=_rUH-sEs68Y
 
- * SHUFFLE FUNCTIONS
- *   - reference // Shuffle function from http://stackoverflow.com/a/2450976
- 
- * TRACK MOVES
- *   - reference:https://stackoverflow.com/questions/41683145/image-click-counter-event-listener-issues
- *   - reference: SEE EXAMPLE 20 -https://stackoverflow.com/questions/1687296/what-is-dom-event-delegation!
- *   - reference: Event listener with anonymous function.
- *   - reference: Parent function example works- https://www.kirupa.com/html5/handling_events_for_many_elements.htm
- *   - reference: Switch literals https://toddmotto.com/deprecating-the-switch-statement-for-object-literals/
-
- * RESTART
- *   - Calling anonymous function
- *   - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call
- *   - you need to call an annonymous function: http://esbueno.noahstokes.com/post/77292606977/self-executing-anonymous-functions-or-how-to-write
- *   - https://stackoverflow.com/questions/13412675/how-can-i-call-an-anonymous-function-from-inside-itself-in-javascript
- *   - https://stackoverflow.com/questions/13013621/javascript-self-calling-anonymous-function-for-scope-closure
- *   - https://stackoverflow.com/questions/8583548/calling-a-javascript-anonymous-function-right-when-its-declared-doesnt-work
- *   - YOUR EXACT PROBLEM CARD RETURNS A LIST OF ELEMENTS:https://stackoverflow.com/questions/48142642/beginner-getting-addeventlistener-is-not-a-function-no-jquery
- *   - Try this, turn the nodelist back into an array by using Array.from or Array.of and the try to call addIcons. Top you are using an array at the bottom it is a node list that looks like an array.
- *   - See this reference for solution - YES! https://stackoverflow.com/questions/12362256/addeventlistener-on-nodelist
- *   - see this reference also about using callback to call an anonymous function. http://javascriptissexy.com/understand-javascript-callback-functions-and-use-them/
- *   - https://www.jstips.co/en/javascript/passing-arguments-to-callback-functions/
- */
+// Show final score on modal
+function finalScore() {
+    const star = document.querySelector('.stars').innerHTML;
+    const score = document.getElementsByClassName('number')[0].innerHTML;
+    if (document.querySelector('#modal1')) {
+    document.querySelector('.modal-body').innerHTML = 
+    `<p>So sorry!</p> <p>There are only 32 moves available. 
+    Here are your stats: <br/> Stars Earned: ${star}  <br/> Score: ${score}</p>`
+    } else if (document.querySelector('#modal2')){
+    document.querySelector('.modal-body').innerHTML = 
+    `<p>I am doing a happy dance,<br/> cause you <strong>WIN</strong>!</p><p> 
+    Here are your stats: <br/> Stars Earned: ${star}  <br/> Score: ${score}</p>`
+    }
+}

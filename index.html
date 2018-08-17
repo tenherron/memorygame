@@ -16,36 +16,30 @@
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-        	</ul>
+            <ul class="stars">
+            </ul>
 
-            <span class="moves"></span> Moves<span class="number">0</span>
+            <span class="moves"></span> Moves <span class="number">0</span>
 
             <div class="restart">
-        		<i class="fa fa-repeat"></i>
-        	</div>
+                <i class="fa fa-repeat" onclick="restart()"></i>
+            </div>
         </section>
 
         <ul class="deck">
         </ul>
-                <!-- Modal 1-->
+        <!-- Modal 1-->
         <div class="modal fade" id="modal1">
             <div class="modal-dialog modal-sm">
               <div class="modal-content">
                 <div class="modal-header">
-                 <button type="button" class="close" onclick="getModal()">&times;</button>
+                 <button type="button" class="close" onclick="tryAgain()">&times;</button>
                  <h2 class="modal-title">GAME OVER</h2>
                 </div>
                 <div class="modal-body">
-                  <p>So sorry! There are only 32 moves available.<p>
-                  <p>I hope you try again.</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" onclick="restart()">PLAY AGAIN</button>
+                  <button type="button" class="btn btn-default" onclick="tryAgain()">PLAY AGAIN</button>
                 </div>
               </div>
             </div>
@@ -59,17 +53,14 @@
                  <h2 class="modal-title">CONGRATULATIONS</h2>
                 </div>
                 <div class="modal-body">
-                  <p>I am doing a happy dance, the running man, and the prep...<p>
-                  <p>cause you <strong>WIN<strong>!</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" onclick="restart()">PLAY AGAIN</button>
+                  <button type="button" class="btn btn-default" onclick="youWin()">PLAY AGAIN</button>
                 </div>
               </div>
             </div>
         </div>
     </div>
-
     <script src="js/app.js"></script>
 </body>
 </html>

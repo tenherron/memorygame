@@ -7,14 +7,18 @@
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+Flip the cards on the board to collect matches. The more cards you match, the more stars you collect. You win the game when you find all 16 card matches in 32 moves or less. To start the game again, click the restart button or hit Play Again when the button appears. 
 
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+To get started, open `index.html` and start playing.
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+Starter code was used for this project and provided to _all_ Udacity students. 
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+## References
+Though I used several references beyond the Udacity course materials, I am highlighting the following references that helped me when I was really stuck.
+Getting Started - approaching the project / a bit complex but helped.
+*  - https://www.youtube.com/watch?v=_rUH-sEs68Y
+Restart function - since I spent a lot of trouble loosing my event listeners on the refresh, I used this as a referenced. 
+*	 - Matthew Cranford's Tutorial - https://matthewcranford.com/category/blog-posts/walkthrough/memory-game/
+I also looked up many references on Event Listeners.
